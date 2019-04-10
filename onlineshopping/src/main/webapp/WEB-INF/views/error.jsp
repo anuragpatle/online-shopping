@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+
 <spring:url var="css" value="/resources/css" />
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
@@ -16,7 +17,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Online Shopping Website Using Spring MVC and Hibernate">
+<meta name="description"
+	content="Online Shopping Website Using Spring MVC and Hibernate">
 <meta name="author" content="Khozema Nullwala">
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
@@ -54,56 +56,38 @@
 </head>
 
 <body>
-	
-	<div class="se-pre-con"></div>
+
 	<div class="wrapper">
 
-		<!-- Navigation -->
-		<%@include file="./shared/navbar.jsp"%>
-
-		<!-- Page Content -->
-
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<a class="navbar-brand" href="${contextRoot}/home">Home</a>
+				</div>
+			</div>
+		</nav>
+		
 		<div class="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="jumbotron">
+							<h1>${errorTitle} </h1>
+							<hr/>
+							<blockquote>
+								${errorDescription}
+							</blockquote>
+						</div>
+					</div>
+				</div>
 			
-			<!-- Loading the home content -->
-			<c:if test="${userClickHome == true }">
-				<%@include file="home.jsp"%>
-			</c:if>
-
-			<!-- Load only when user clicks about -->
-			<c:if test="${userClickAbout == true }">
-				<%@include file="about.jsp"%>
-			</c:if>
-
-			<!-- Load only when user clicks contact -->
-			<c:if test="${userClickContact == true }">
-				<%@include file="contact.jsp"%>
-			</c:if>
-			
-			<!-- Load only when user clicks all products -->
-			<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true }">
-				<%@include file="listProducts.jsp"%>
-			</c:if>	
-			
-			
-			<!-- Load only when user clicks show product -->
-			<c:if test="${userClickShowProduct == true}">
-				<%@include file="singleProduct.jsp"%>
-			</c:if>		 						
-
-			<!-- Load only when user clicks manage product -->
-			<c:if test="${userClickManageProduct == true}">
-				<%@include file="manageProducts.jsp"%>
-			</c:if>	
-
-<%-- 			<!-- Load only when user clicks manage product -->
-			<c:if test="${userClickShowCart == true}">
-				<%@include file="cart.jsp"%>
-			</c:if>	
---%>
+			</div>
+		
 		</div>
 
 
+		
 		<!-- Footer comes here -->
 		<%@include file="./shared/footer.jsp"%>
 
@@ -116,16 +100,16 @@
 
 		<!-- Bootstrap Core JavaScript -->
 		<script src="${js}/bootstrap.min.js"></script>
-		
+
 		<!-- DataTable Plugin -->
 		<script src="${js}/jquery.dataTables.js"></script>
-		
+
 		<!-- DataTable Bootstrap Script -->
 		<script src="${js}/dataTables.bootstrap.js"></script>
-		
+
 		<!-- DataTable Bootstrap Script -->
 		<script src="${js}/bootbox.min.js"></script>
-		
+
 		<!-- Self coded javascript -->
 		<script src="${js}/myapp.js"></script>
 

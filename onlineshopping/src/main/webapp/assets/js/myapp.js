@@ -16,7 +16,7 @@ $(function() {
 		$(document).ajaxSend(function(e, xhr, options) {			
 			xhr.setRequestHeader(header,token);			
 		});					
-	}
+	} 
 	
 	
 	
@@ -57,8 +57,7 @@ $(function() {
 		if (window.categoryId == '') {
 			jsonUrl = window.contextRoot + '/json/data/all/products';
 		} else {
-			jsonUrl = window.contextRoot + '/json/data/category/'
-					+ window.categoryId + '/products';
+			jsonUrl = window.contextRoot + '/json/data/category/' + window.categoryId + '/products';
 		}
 
 		$table
@@ -69,7 +68,13 @@ $(function() {
 					pageLength : 5,
 					ajax : {
 						url : jsonUrl,
-						dataSrc : ''
+						dataSrc : ''    //dataSrc is empty here because out json response is like this, nothing is written after square bracket, so dataSrc is empty.
+									    //                    [
+										//					    {
+										//					        "id": 4,
+										//					        "code": "PRDMNO123PQRX",
+										//					        "name": " Macbook Pro",
+										//							--------
 					},
 					columns : [
 							{
@@ -149,21 +154,21 @@ $(function() {
 	}
 
 	
+
 	
 	// list of all products for admin
-	var $productsTable = $('#productsTable');
+	var $adminProductsTable = $('#adminProductsTable');
 	
 	
-	if($productsTable.length) {
+	if($adminProductsTable.length) {
 		
 		var jsonUrl = window.contextRoot + '/json/data/admin/all/products';
-		console.log(jsonUrl);
 		
-		$productsTable.DataTable({
+		$adminProductsTable.DataTable({
 					lengthMenu : [ [ 10, 30, 50, -1 ], [ '10 Records', '30 Records', '50 Records', 'ALL' ] ],
 					pageLength : 30,
 					ajax : {
-						url : jsonUrl,
+						url : jsonUrl,	
 						dataSrc : ''
 					},
 					columns : [		
@@ -175,7 +180,7 @@ $(function() {
 					           		mRender: function(data,type,row) {
 					           			return '<img src="' + window.contextRoot
 										+ '/resources/images/' + data
-										+ '.jpg" class="dataTableImg"/>';					           			
+										+ '.jpg" class="adminDataTableImg"/>';					           			
 					           		}
 					           	},
 					           	{
@@ -233,15 +238,12 @@ $(function() {
 									}
 								}					           	
 					],
-					
-					
 					initComplete: function () {
 						var api = this.api();
 						api.$('.switch input[type="checkbox"]').on('change' , function() {							
 							var dText = (this.checked)? 'You want to activate the Product?': 'You want to de-activate the Product?';
 							var checked = this.checked;
 							var checkbox = $(this);
-							debugger;
 						    bootbox.confirm({
 						    	size: 'medium',
 						    	title: 'Product Activation/Deactivation',
@@ -249,11 +251,15 @@ $(function() {
 						    	callback: function (confirmed) {
 							        if (confirmed) {
 							            $.ajax({							            	
-							            	type: 'GET',
+							            	type: 'POST',
 							            	url: window.contextRoot + '/manage/product/'+checkbox.prop('value')+'/activation',
 							        		timeout : 100000,
 							        		success : function(data) {
-							        			bootbox.alert(data);							        										        			
+							        			bootbox.alert({
+							        				size: 'medium',
+							        				title: 'Information',
+							        				message: data
+							        			});							        										        			
 							        		},
 							        		error : function(e) {
 							        			bootbox.alert('ERROR: '+ e);
@@ -303,13 +309,13 @@ $(function() {
 		
 		$categoryForm.validate({			
 				rules: {
-					name: {
+					name: { 
 						required: true,
-						minlength: 3
+						minlength: 5
 					},
 					description: {
 						required: true,
-						minlength: 3					
+						minlength: 15					
 					}				
 				},
 				messages: {					
@@ -319,7 +325,7 @@ $(function() {
 					},
 					description: {
 						required: 'Please enter product name!',
-						minlength: 'Please enter atleast five characters'
+						minlength: 'Please enter atleast 15 characters'
 					}					
 				},
 				errorElement : "em",
@@ -410,5 +416,7 @@ $(function() {
 				window.location.href = updateUrl;
 			}
 		}
-	});			
+	});		
+	
+	
 });

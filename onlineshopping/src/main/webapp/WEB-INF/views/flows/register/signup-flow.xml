@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+	<!-- is the start state -->
+	<view-state id="personal" view="flows/register/signup-personal"></view-state>
+	
+	<!-- It will take us in the home.jsp -->
+	<end-state id="home_endstate" view="externalRedirect:contextRelative:/"/> 
+
+	<!-- Global Transition -->
+	<global-transitions>
+		<!-- 'home' is mapped with href="${flowExecutionUrl}&_eventId_home" of signup-personal.jsp -->
+		<transition on="home" to="home_endstate"/> 
+	</global-transitions>
+	
+	
+</flow>

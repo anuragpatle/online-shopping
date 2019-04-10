@@ -25,17 +25,31 @@
                         <a href="${contextRoot}/contact">Contact</a>
                     </li>
                     
-                    <li id="listProducts">
+                    <li id="listProducts"> 
                         <a href="${contextRoot}/show/all/products">View Products</a>
                     </li>
-					<security:authorize access="hasAuthority('ADMIN')">
+                    
+                      <li id="manageProduct">
+	                        <a href="${contextRoot}/manage/products">Manage Product</a>
+	                    </li>		
+					<%-- <security:authorize access="hasAuthority('ADMIN')"	>
 	                    <li id="manageProduct">
 	                        <a href="${contextRoot}/manage/product">Manage Product</a>
 	                    </li>					
-					</security:authorize>
+					</security:authorize> --%>
                 </ul>
+                
+                 <ul class="nav navbar-nav navbar-right">
+                 	<li id="register">
+	                        <a href="${contextRoot}/register">Sign Up</a>
+	                </li>
+					<li id="login">
+	                       <a href="${contextRoot}/login">Login</a>
+	                </li>
+                 </ul>
+                 
 			    
-			    <ul class="nav navbar-nav navbar-right">
+			    <%-- <ul class="nav navbar-nav navbar-right">
 			    	<security:authorize access="isAnonymous()">
 	                    <li id="signup">
 	                        <a href="${contextRoot}/membership">Sign Up</a>
@@ -65,7 +79,7 @@
 						  </ul>		
 						</li>    			    
 			    	</security:authorize>                    
-			    </ul>                
+			    </ul>       --%>          
                 
             </div>
             <!-- /.navbar-collapse -->

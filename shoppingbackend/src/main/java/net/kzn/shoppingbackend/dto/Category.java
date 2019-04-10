@@ -1,11 +1,28 @@
 package net.kzn.shoppingbackend.dto;
 
-public class Category {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Category implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	private String name;
+	
 	private String description;
+	
+	@Column(name ="image_url")
 	private String imageURL;
+	
+	@Column(name ="is_active")	
 	private boolean active = true;
 
 	public int getId() {
