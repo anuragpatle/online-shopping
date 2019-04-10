@@ -16,7 +16,7 @@ $(function() {
 		$(document).ajaxSend(function(e, xhr, options) {			
 			xhr.setRequestHeader(header,token);			
 		});					
-	}
+	} 
 	
 	
 	
